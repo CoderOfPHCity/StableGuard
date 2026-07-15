@@ -68,6 +68,7 @@ Base URL: `https://stableguard-r2fz.onrender.com`
 | `GET` | `/health` | Service health check | None |
 | `GET` | `/protection-status` | Protection status for the default demo pool (or specify `?poolId=...`) | None |
 | `GET` | `/protection-status/:poolId` | Protection status for a specific pool | None |
+| `POST` | `/simulate-trade` | Simulate a swap (body: `{ poolId?, amountSpecified, zeroForOne }`) | x402‑gated if `PAID_MODE=true` |
 
 ### Example Requests
 
