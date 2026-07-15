@@ -56,6 +56,55 @@ The dynamic fee curve is the product: low fee when calm, higher fee when the hoo
 | **Pool ID** | `0xb6734893c2e5094909ae79428a84e29be959cf7008f30dc4620073b3c5924d91` | Unique identifier for the deployed pool |
 | **Web Interface** | [stableguard-r2fz.onrender.com](https://stableguard-r2fz.onrender.com) | Frontend application for interacting with StableGuard |
 
+
+
+
+## API Endpoints
+
+Base URL: `https://stableguard-r2fz.onrender.com`
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `GET` | `/health` | Service health check | None |
+| `GET` | `/protection-status` | Protection status for the default demo pool (or specify `?poolId=...`) | None |
+| `GET` | `/protection-status/:poolId` | Protection status for a specific pool | None |
+
+### Example Requests
+
+```bash
+# Health check
+curl https://stableguard-r2fz.onrender.com/health
+
+# Default pool status
+curl https://stableguard-r2fz.onrender.com/protection-status
+
+# Specific pool by path
+curl https://stableguard-r2fz.onrender.com/protection-status/0xb6734893c2e5094909ae79428a84e29be959cf7008f30dc4620073b3c5924d91
+```
+
+### Example Responses
+
+**Health check:**
+```json
+{"status":"ok","service":"stableguard-asp"}
+```
+
+**Protection status (pool):**
+```json
+{
+  "poolId": "0xb6734893c2e5094909ae79428a84e29be959cf7008f30dc4620073b3c5924d91",
+  "netSkew": "0",
+  "tier": "calm",
+  "currentFeeBps": 1,
+  "circuitBreakerArmed": false,
+  "maxSafeAdditionalSkew": "300000000000000000",
+  "recommendation": "SAFE_TO_SWAP",
+  "fetchedAtBlock": 51903459,
+  "staleAfterSeconds": 12
+}
+```
+
+
 ## Known simplifications
 
 - The circuit breaker currently **reverts** oversized trades rather than partially filling them in-hook. The API's `maxSafeAdditionalSkew` field lets agents size trades safely in advance; true in-hook partial-fill is the natural next iteration.

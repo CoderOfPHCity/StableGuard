@@ -9,24 +9,17 @@ import {Currency} from "v4-core/types/Currency.sol";
 import {Hooks} from "v4-core/libraries/Hooks.sol";
 import {LPFeeLibrary} from "v4-core/libraries/LPFeeLibrary.sol";
 import {HookMiner} from "../src/HookMiner.sol";
-//contracts/lib/uniswap-hooks/lib/v4-periphery/src/utils
-//import {HookMiner} from "contracts/lib/uniswap-hooks/lib/v4-periphery/src/utils/HookMiner.sol";
 import {StableGuardHook} from "../src/StableGuardHook.sol";
 
 /// @notice Mines a CREATE2 salt so the deployed hook address encodes the
 ///         beforeSwap/afterSwap permission bits, deploys StableGuardHook,
 ///         then initializes a dynamic-fee pool for USDX/USDY with the hook
 ///         attached.
-///
-/// @dev PREREQUISITE: run DeployMockTokens.s.sol first and set
-///      MOCK_USDX_ADDRESS / MOCK_USDY_ADDRESS in .env. Also confirm
-///      POOL_MANAGER_ADDRESS via scripts/verify-pool-manager.sh — this
-///      script will not check that for you.
+
 contract DeployHook is Script {
     using PoolIdLibrary for PoolKey;
 
-    // Canonical deterministic CREATE2 deployer used by Foundry/most tooling.
- address constant CREATE2_DEPLOYER = 0x4e59b44847b379578588920cA78FbF26c0B4956C;
+    address constant CREATE2_DEPLOYER = 0x4e59b44847b379578588920cA78FbF26c0B4956C;
 
     function run() external {
         uint256 pk = vm.envUint("PRIVATE_KEY");
@@ -49,9 +42,8 @@ contract DeployHook is Script {
         require(address(hook) == hookAddress, "DeployHook: mined address mismatch");
 
         // Order currencies as required by PoolKey (currency0 < currency1).
-        (Currency currency0, Currency currency1) = usdx < usdy
-            ? (Currency.wrap(usdx), Currency.wrap(usdy))
-            : (Currency.wrap(usdy), Currency.wrap(usdx));
+        (Currency currency0, Currency currency1) =
+            usdx < usdy ? (Currency.wrap(usdx), Currency.wrap(usdy)) : (Currency.wrap(usdy), Currency.wrap(usdx));
 
         PoolKey memory key = PoolKey({
             currency0: currency0,

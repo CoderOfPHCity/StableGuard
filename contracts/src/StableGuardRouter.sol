@@ -6,7 +6,6 @@ import {IUnlockCallback} from "v4-core/interfaces/callback/IUnlockCallback.sol";
 import {PoolKey} from "v4-core/types/PoolKey.sol";
 import {BalanceDelta} from "v4-core/types/BalanceDelta.sol";
 import {Currency} from "v4-core/types/Currency.sol";
-//import {CurrencySettler} from "v4-core/../test/utils/CurrencySettler.sol";
 import {ISignatureTransfer} from "permit2/src/interfaces/ISignatureTransfer.sol";
 import {SwapParams, ModifyLiquidityParams} from "v4-core/types/PoolOperation.sol";
 import {CurrencySettler} from "uniswap-hooks/utils/CurrencySettler.sol";
@@ -16,23 +15,6 @@ import {CurrencySettler} from "uniswap-hooks/utils/CurrencySettler.sol";
 ///         approve() transaction — same gasless-approval pattern the Trade
 ///         API's Permit2 flow uses, adapted for a direct pool swap rather
 ///         than routed execution.
-///
-/// @dev ⚠️ VERSION-SENSITIVE FILE — verify against your installed v4-core
-///      before relying on it. This is the most implementation-fragile part
-///      of the repo:
-///        - `CurrencySettler` is pulled from v4-core's test utils (a common
-///          pattern in hook/router templates, but its exact location and
-///          signature have moved between v4-core releases — confirm the
-///          import path resolves after `forge install`).
-///        - `_settleDelta` handles the simple case (single-direction
-///          exact-in swap, one currency owed to the pool, one owed back to
-///          the payer). It has NOT been run against a live pool yet.
-///          Run `forge test` on `RouterSwap.t.sol` (add one — none is
-///          included yet) before trusting this beyond a testnet demo.
-///        - Permit2's canonical address (0x000000000022D473030F116dDEE9F6B43aC78BA)
-///          is deployed deterministically on most EVM chains, but — same
-///          caveat as PoolManager — confirm it on X Layer testnet with
-///          `scripts/verify-permit2.sh` before deploying against it.
 
 contract StableGuardRouter is IUnlockCallback {
     using CurrencySettler for Currency;

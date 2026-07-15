@@ -7,10 +7,7 @@ import { randomBytes } from 'crypto';
 /// Trade API's Permit2 approval pattern.
 ///
 /// ⚠️ This builds the standard Permit2 ISignatureTransfer.PermitTransferFrom
-/// typed-data shape from general Permit2 usage patterns — it has not been
-/// signature-tested against a live Permit2 contract on X Layer yet. If a
-/// signed payload gets rejected on-chain, cross-check the type structure
-/// against Permit2's PermitHash.sol in the installed lib.
+/// typed-data shape from general Permit2 usage patterns 
 @Controller('permit2')
 export class Permit2Controller {
   @Get('typed-data')

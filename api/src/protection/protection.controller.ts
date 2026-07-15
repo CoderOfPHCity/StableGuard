@@ -11,9 +11,6 @@ interface SimulateTradeBody {
 /// StableGuard's A2MCP endpoint. OKX.AI A2MCP services must be either:
 ///   (a) free — just return the result, or
 ///   (b) x402-paid.
-/// This ships as (a). See docs/SUBMISSION.md for the x402 upgrade path once
-/// the OKX Payment SDK is installed — flip PAID_MODE=true in api/.env and
-/// wire the guard noted inline below.
 @Controller()
 export class ProtectionController {
   constructor(private readonly onchain: OnchainService) {}

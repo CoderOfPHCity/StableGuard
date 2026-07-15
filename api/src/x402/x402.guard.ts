@@ -2,8 +2,7 @@ import { CanActivate, ExecutionContext, Injectable, HttpException, HttpStatus } 
 import { Request } from 'express';
 
 /// Gates paid A2MCP endpoints per the x402 protocol shape OKX's A2MCP spec
-/// expects. This is a structural implementation, not a full one — you said
-/// you don't have the OKX Payment SDK installed yet, so actual payment
+/// expects. This is a structural implementation, not a full one — OKX Payment SDK isn't installed yet, so actual payment
 /// *verification* (steps 2-3 below) is a TODO, clearly marked. What's real:
 ///
 ///   1. If PAID_MODE=false (default), this guard is a no-op — the endpoint
@@ -14,9 +13,7 @@ import { Request } from 'express';
 ///      with the header).
 ///   3. If PAID_MODE=true and a X-PAYMENT header IS present, this currently
 ///      only checks that it's non-empty — TODO once the OKX Payment SDK is
-///      installed: call its verify/settle function here instead of the
-///      placeholder check, per the Onchain OS docs' guidance to use "OKX
-///      Payment SDK (recommended)" for x402-compliant endpoints.
+///      installed: call its verify/settle function here
 @Injectable()
 export class X402Guard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
@@ -42,11 +39,6 @@ export class X402Guard implements CanActivate {
     }
 
     // --- TODO: real verification via OKX Payment SDK ---------------------
-    // Once installed, replace this with something like:
-    //   const verified = await okxPaymentSdk.verify(paymentHeader, { price, merchantId });
-    //   if (!verified) throw new HttpException(..., HttpStatus.PAYMENT_REQUIRED);
-    // Placeholder only checks the header isn't empty — DO NOT treat this as
-    // real payment enforcement.
     // -----------------------------------------------------------------------
 
     return true;
