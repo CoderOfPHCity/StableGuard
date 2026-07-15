@@ -10,7 +10,5 @@ evm_version = "cancun"
 fs_permissions = [{ access = "read", path = "./" }]
 
 [rpc_endpoints]
-xlayer_testnet = "${RPC_URL}"
+arc_testnet = "${RPC_URL}"
 
-[etherscan]
-xlayer_testnet = { key = "${OKLINK_API_KEY}", url = "https://www.oklink.com/api" }

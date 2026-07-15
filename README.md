@@ -41,6 +41,16 @@ The dynamic fee curve is the product: low fee when calm, higher fee when the hoo
 | ASP API | Stateless service exposing live protection status | NestJS, ethers.js |
 | Deployment | X Layer (contracts) + Render (API) | Foundry, Docker |
 
+
+| Component | Address / Link | Description |
+|-----------|---------------|-------------|
+| **StableGuard Hook** | [`0x0B46218C3FA54CC0f1E058016bc4a1f51DCB40C0`](https://testnet.arcscan.app/address/0x0B46218C3FA54CC0f1E058016bc4a1f51DCB40C0) | Core hook contract implementing the StableGuard logic |
+| **PoolManager** | [`0x74efFA1DfA6582e835917cDA5c4932a5dd0e5295`](https://testnet.arcscan.app/address/0x74efFA1DfA6582e835917cDA5c4932a5dd0e5295) | Uniswap V4 PoolManager instance managing the pool |
+| **MOCK_USDX** | [`0xfE99b51a3D62363e2C55cc229351997d4771e08a`](https://testnet.arcscan.app/address/0xfE99b51a3D62363e2C55cc229351997d4771e08a) | Mock USDX token contract |
+| **MOCK_USDY** | [`0xCD4C3F60FcdeAB580b74A366c31e449716e20Cc9`](https://testnet.arcscan.app/address/0xCD4C3F60FcdeAB580b74A366c31e449716e20Cc9) | Mock USDY token contract |
+| **Pool ID** | `0xb6734893c2e5094909ae79428a84e29be959cf7008f30dc4620073b3c5924d91` | Unique identifier for the deployed pool |
+| **Web Interface** | [stableguard-r2fz.onrender.com](https://stableguard-r2fz.onrender.com) | Frontend application for interacting with StableGuard |
+
 ## Known simplifications
 
 - The circuit breaker currently **reverts** oversized trades rather than partially filling them in-hook. The API's `maxSafeAdditionalSkew` field lets agents size trades safely in advance; true in-hook partial-fill is the natural next iteration.
