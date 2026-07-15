@@ -1,4 +1,10 @@
 # StableGuard — Architecture
+```
+
+Note on Testnet Choice
+Due to time constraints and persistent difficulties in obtaining testnet tokens for Xlayer (despite repeated efforts to contact the team), we have deployed StableGuard on Arc Testnet for this demo. The Xlayer deployment remains under active development, and StableGuard is designed as a multichain CCTP agent—once Xlayer is fully accessible, we will extend the deployment to include it alongside other chains.
+
+```
 
 ## Problem
 
