@@ -1,0 +1,28 @@
+# Render Blueprint — since you have an existing Render account, either:
+#   (a) point Render at this repo's api/ subfolder as a new Web Service and
+#       let it auto-detect the Dockerfile, or
+#   (b) use this blueprint directly: Render dashboard → New → Blueprint →
+#       select this repo, Render will read this file.
+#
+# No Postgres per your call to keep state fully on-chain — the API is
+# stateless and just reads StableGuardHook via RPC on each request.
+
+services:
+  - type: web
+    name: stableguard-asp-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    envVars:
+      - key: RPC_URL
+        sync: false # set manually in Render dashboard — don't commit RPC keys
+      - key: HOOK_ADDRESS
+        sync: false
+      - key: POOL_ID
+        sync: false
+      - key: PORT
+        value: 3000
+      - key: PAID_MODE
+        value: false
