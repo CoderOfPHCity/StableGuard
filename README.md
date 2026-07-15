@@ -1,5 +1,10 @@
 # StableGuard
+```
 
+Note on Testnet Choice
+Due to time constraints and persistent difficulties in obtaining testnet tokens for Xlayer (despite repeated efforts to contact the team), we have deployed StableGuard on Arc Testnet for this demo. The Xlayer deployment remains under active development, and StableGuard is designed as a multichain CCTP agent—once Xlayer is fully accessible, we will extend the deployment to include it alongside other chains.
+
+```
 **Uniswap v4 Hook LP-Protection ASP — built for the OKX.AI Genesis Hackathon**
 
 StableGuard protects uniswap pools from impermanent loss and inventory skew during agent-driven, yield-seeking trading. The dynamic fee curve is the product: fees stay low while the pool is calm, and rise automatically as the hook actively defends it. A circuit breaker blocks trades that would push the pool past a safe skew threshold. A lightweight off-chain API exposes this protection status so other agents can check a pool's live risk before routing a swap through it gated via x402 payment.
