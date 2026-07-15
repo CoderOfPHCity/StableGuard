@@ -105,14 +105,6 @@ curl https://stableguard-r2fz.onrender.com/protection-status/0xb6734893c2e509490
 }
 ```
 
-**Specific Pool**
-```json
-{
-   "poolId":"0xb6734893c2e5094909ae79428a84e29be959cf7008f30dc4620073b3c5924d91","netSkew":"0","tier":"calm","currentFeeBps":1,"circuitBreakerArmed":false,"maxSafeAdditionalSkew":"300000000000000000","recommendation":"SAFE_TO_SWAP","fetchedAtBlock":51905007,"staleAfterSeconds":12
-   }
-```
-
-
 ## Known simplifications
 
 - The circuit breaker currently **reverts** oversized trades rather than partially filling them in-hook. The API's `maxSafeAdditionalSkew` field lets agents size trades safely in advance; true in-hook partial-fill is the natural next iteration.
