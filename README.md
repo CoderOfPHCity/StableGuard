@@ -17,7 +17,7 @@ Agents increasingly compete for yield across stablecoin pools, and that trading 
 
 ## Solution
 
-A Uniswap v4 hook on X Layer that:
+A Uniswap v4 hook on X Layer that:.
 
 1. Tracks pool skew live, on-chain, per swap.
 2. Moves the swap fee through three tiers as skew rises — calm, elevated, defensive — so the cost of trading against the pool's balance scales automatically with the risk that trade adds.
